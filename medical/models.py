@@ -12,7 +12,7 @@ from django.conf import settings
 import core
 from medical.apps import MedicalConfig
 from medical.services import set_item_or_service_deleted
-
+import datetime
 
 class Diagnosis(core_models.VersionedModel):
     id = models.AutoField(db_column='ICDID', primary_key=True)
@@ -152,7 +152,6 @@ def save_history_on_update(sender, instance, **kwargs):
     if instance != old_instance:
         # One or more fields have changed, so save history
         old_instance.save_history()
-        from core import datetime
         now = datetime.datetime.now()
         instance.validity_from = now
 
@@ -284,7 +283,6 @@ def save_history_on_update(sender, instance, **kwargs):
     if instance != old_instance:
         # One or more fields have changed, so save history
         old_instance.save_history()
-        from core import datetime
         now = datetime.datetime.now()
         instance.validity_from = now
 
